@@ -1,19 +1,3 @@
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-  apiKey: "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",
-});
-
-const completion = openai.chat.completions.create({
-  model: "gpt-4o-mini",
-  store: true,
-  messages: [
-    {"role": "user", "content": "write a haiku about ai"},
-  ],
-});
-
-completion.then((result) => console.log(result.choices[0].message));
-
 SAMPLE:
 1. Real-world Demand
 Millions in rural areas lack timely access to healthcare due to doctor shortages.
