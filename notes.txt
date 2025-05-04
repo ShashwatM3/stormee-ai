@@ -1,0 +1,86 @@
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: "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",
+});
+
+const completion = openai.chat.completions.create({
+  model: "gpt-4o-mini",
+  store: true,
+  messages: [
+    {"role": "user", "content": "write a haiku about ai"},
+  ],
+});
+
+completion.then((result) => console.log(result.choices[0].message));
+
+SAMPLE:
+1. Real-world Demand
+Millions in rural areas lack timely access to healthcare due to doctor shortages.
+MedMatch AI bridges this gap by connecting patients with traveling medical professionals.
+
+2. Market Analysis
+The global rural health market is valued at $30B+ with growing investment in mobile health.
+MedMatch taps into underserved regions with AI-enhanced outreach and care delivery.
+
+3. Competitor Analysis
+Current apps like Practo and Zocdoc cater to urban users and lack travel-based support.
+MedMatch stands out by combining AI-driven triage with mobile doctor visits for rural care.
+
+4. SWOT Analysis
+Strengths: AI-powered triage and hybrid care reach underserved rural areas effectively.
+Weaknesses: Infrastructure gaps and licensing barriers limit scalability.
+Opportunities & Threats: High potential in emerging markets, but faces rising competition, regulatory risks, and data privacy concerns.
+
+5. Growth Strategy
+Start with pilot programs in two Indian states and scale using NGO/government partnerships.
+Expand across Asia and Africa with predictive AI and local clinician onboarding.
+
+6. Basic Funding Guidance
+Seed: $250K–$500K to build MVP and run pilot via health accelerators or angel investors.
+Series A: $1M–$3M for scaling, AI upgrades, and international expansion.
+
+7. End-to-End Description
+Users access care via app or kiosk, input symptoms, and get matched through AI to a provider.
+Doctors either travel to the patient or consult virtually, with feedback enhancing the system.
+
+------------------------------------------------------------------------------------------------------------------------
+    const prompt = `
+    You are a creative brainstorming assistant, assisting a user in forming a powerful and detailed executive summary for their startup.
+    Below is information about the user's product/startup idea that you must use when crafting your responses:
+    ${data2[0].Idea}
+    ${data2[0].Market_Analysis}
+    ${data2[0].Real_World_Demand}
+    ${data2[0].Competitor_Analysis}
+    ${data2[0].SWOT_Analysis}
+    ${data2[0].Growth_Strategy}
+
+    Voice & Tone requirements:
+    Persuasive
+    Clear and professional, suitable for a business context.
+    Empowering
+    `
+
+    const promptBrief = `
+    Synthesize the product idea in 2-3 sentences, focusing on what it is, what it does, and who it is for. Include the core functionality or service and the primary use case.
+    `
+    const promptUVP = `
+    Your task is to synthesize a clear, concise, and persuasive UVP, within 3-4 sentences, that resonates with the user's ideal readers/customers. First, highlight the customer's problem and why it is significant. Then, present the solution and the benefits they’ll experience. Finally, invite them to join the movement.
+    `
+
+    const promptTargetAudience = `
+    Your task is to generate a Target Audience brief for a user's startup idea in two paragraphs.
+
+    # Steps
+
+    1. **Understand the Startup Idea**: Begin by gathering key information about the startup, including its mission, product or service, and unique selling points.
+    2. **Identify the Target Audience**: Determine the demographics, psychographics, and behaviors of the potential customers who would benefit most from the startup's offerings.
+    3. **Analyze Market Needs**: Consider the current market trends and needs that align with the startup's offerings and how the target audience fits into this landscape.
+    4. **Craft the Brief**: Write two paragraphs that clearly describe the target audience, including their characteristics, needs, and how the startup addresses these needs.
+
+    The output should be two well-structured paragraphs. The first paragraph should focus on the demographics and psychographics of the target audience. The second paragraph should discuss how the startup's offerings meet the needs of this audience and any relevant market trends.
+    `
+
+    const promptProblemStatement = `
+    Your task is to generate a concise and compelling two-sentence problem statement. Make sure it is free from solutions, symptoms, causes, or blame. Instead, clearly identify the core real-world problem being solved, specify who is impacted, where and when it occurs, and why it matters. Ensure it is written in human terms, is relatable, and implies that a solution is both necessary and possible
+    `
