@@ -15,6 +15,10 @@ import {
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import { toast } from "sonner"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogTitle } from '@/components/ui/dialog';
+import { DialogTrigger } from '@radix-ui/react-dialog';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 const MarkdownRenderer = ({ text }) => {
   // Insert newline or double line break before each sentence that starts with bold (**)
@@ -31,34 +35,35 @@ function ExecutiveSummary() {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  const promptBrief = `
-  Synthesize the product idea in 2-3 sentences, focusing on what it is, what it does, and who it is for. Include the core functionality or service and the primary use case.
-  `
-  const promptUVP = `
-  Your task is to synthesize a clear, concise, and persuasive UVP, within 3-4 sentences, that resonates with the user's ideal readers/customers. First, highlight the customer's problem and why it is significant. Then, present the solution and the benefits they’ll experience. Finally, invite them to join the movement.
-  `
+  const mainprompt = `
+  **Output Format (Markdown):**
 
-  const promptTargetAudience = `
-  Your task is to generate a Target Audience brief for a user's startup idea in two paragraphs.
+  ### Brief Description
+  [Synthesize the product idea in 2-3 sentences, focusing on what it is, what it does, and who it is for. Include the core functionality or service and the primary use case.]
 
-  # Steps
+  ### Unique Value Proposition
+  [Your task for this part is to synthesize a clear, concise, and persuasive UVP, within 3-4 sentences, that resonates with the user's ideal readers/customers. First section will be PROBLEM. This will highlight the customer's problem and why it is significant. Then second section will be the SOLUTION. This will present the solution and the benefits they will experience. The third section will be the CALL TO ACTION. This invites them to join the movement]
 
-  1. **Understand the Startup Idea**: Begin by gathering key information about the startup, including its mission, product or service, and unique selling points.
-  2. **Identify the Target Audience**: Determine the demographics, psychographics, and behaviors of the potential customers who would benefit most from the startup's offerings.
-  3. **Analyze Market Needs**: Consider the current market trends and needs that align with the startup's offerings and how the target audience fits into this landscape.
-  4. **Craft the Brief**: Write two paragraphs that clearly describe the target audience, including their characteristics, needs, and how the startup addresses these needs.
+  ### Target Audience
+  [Your task for this part is to analyze the target Audience.
+  1st section, will be 3 lines, where you determine the demographics, psychographics, and behaviors of the potential customers who would benefit most from the startup's offerings. Include a newline space after this
+  2nd section will be 3 lines, where you analyze market needs. Consider the current market trends and needs that align with the startup's offerings and how the target audience fits into this landscape. Include a newline space after this
+  3rd section will be 3 lines. Clearly describe the target audience, including their characteristics, needs, and how the startup addresses these needs.]
 
-  The output should be two well-structured paragraphs. The first paragraph should focus on the demographics and psychographics of the target audience. The second paragraph should discuss how the startup's offerings meet the needs of this audience and any relevant market trends.
-  `
+  ### Problem Statement
+  [ Your task is to generate a concise and compelling two-sentence problem statement. Make sure it is free from solutions, symptoms, causes, or blame. Instead, clearly identify the core real-world problem being solved, specify who is impacted, where and when it occurs, and why it matters. Ensure it is written in human terms, is relatable, and implies that a solution is both necessary and possible]
 
-  const promptProblemStatement = `
-  Your task is to generate a concise and compelling two-sentence problem statement. Make sure it is free from solutions, symptoms, causes, or blame. Instead, clearly identify the core real-world problem being solved, specify who is impacted, where and when it occurs, and why it matters. Ensure it is written in human terms, is relatable, and implies that a solution is both necessary and possible
-  `
+  Please ensure each section is clearly labeled and well-structured.
+`
 
   const [briefDesc, setBriefDesc] = useState('');
   const [uvp, setUVP] = useState('');
   const [targetAudience, setTargetAudience] = useState('');
   const [problemStatement, setProblemStatement] = useState('');
+  const [briefDescNew, setBriefDescNew] = useState(briefDesc);
+  const [uvpNew, setUVPNew] = useState('');
+  const [targetAudienceNew, setTargetAudienceNew] = useState('');
+  const [problemStatementNew, setProblemStatementNew] = useState('');
 
   async function handleCopy(textToCopy) {
     try {
@@ -134,27 +139,53 @@ function ExecutiveSummary() {
       //   return;
       // }    
       // console.log("data2[0]:", data2[0]);
-  
-      const briefgen = await generateFields(prompt + " " + promptBrief);
-      const probgen = await generateFields(prompt + " " + promptProblemStatement);
-      const tagen = await generateFields(prompt + " " + promptTargetAudience);
-      const uvpgen = await generateFields(prompt + " " + promptUVP);
       
-      if (briefgen && probgen && tagen && uvpgen) {
-        setBriefDesc(briefgen.choices[0].message.content);
-        setProblemStatement(probgen.choices[0].message.content);
-        setTargetAudience(tagen.choices[0].message.content);
-        setUVP(uvpgen.choices[0].message.content);
+      const totalgen = await generateFields(prompt + " " + mainprompt);
+
+      console.log(totalgen);
+      
+      if (totalgen) {
+        const message = totalgen.choices[0].message.content;
+      
+        const briefDesc = message.substring(
+          message.indexOf("### Brief Description"),
+          message.indexOf("### Unique Value Proposition")
+        );
+      
+        const uvp = message.substring(
+          message.indexOf("### Unique Value Proposition"),
+          message.indexOf("### Target Audience")
+        );
+      
+        const targetAudience = message.substring(
+          message.indexOf("### Target Audience"),
+          message.indexOf("### Problem Statement")
+        );
+      
+        const problemStatement = message.substring(
+          message.indexOf("### Problem Statement")
+        );
+      
+        setBriefDesc(briefDesc);
+        setUVP(uvp);
+        setTargetAudience(targetAudience);
+        setProblemStatement(problemStatement);
+      
         const { error } = await supabase
           .from('Executive_Summary')
-          .insert({ 
+          .insert({
             user_email: session.user?.email,
-            brief_description: briefgen.choices[0].message.content,
-            uvp: uvpgen.choices[0].message.content,
-            target_audience: tagen.choices[0].message.content,
-            problem_statement: probgen.choices[0].message.content
-          })
+            brief_description: briefDesc,
+            uvp: uvp,
+            target_audience: targetAudience,
+            problem_statement: problemStatement
+          });
+      
+        if (error) {
+          console.error('Insert error:', error);
+        }
       }
+      
     } else {
       setBriefDesc(dataES[0].brief_description);
       setProblemStatement(dataES[0].problem_statement);
@@ -168,6 +199,12 @@ function ExecutiveSummary() {
       fetchSupaData();
     }
   }, [status]);
+
+  useEffect(() => {
+  if (briefDesc) {
+    setBriefDescNew(briefDesc);
+  }
+}, [briefDesc]);
 
   return (
     <div className='es-main'>
@@ -197,8 +234,30 @@ function ExecutiveSummary() {
                           <Button onClick={() => {
                             handleCopy(briefDesc);
                           }} className='mr-2'>Copy</Button>
-                          <Button className='mr-2' variant={'secondary'}>Edit</Button>
-                          <Button className='bg-transparent border text-white hover:bg-transparent hover:border-white cursor-pointer'>Edit with AI</Button>
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button className='mr-2' variant={'secondary'}>Edit</Button>
+                            </DialogTrigger>
+                            <DialogContent className='dark'>
+                              <DialogTitle className='mb-5 mt-2'>Edit Brief Description of your product</DialogTitle>
+                              <DialogDescription>
+                                <Textarea
+                                  onChange={(e) => setBriefDescNew(e.target.value)}
+                                  value={briefDescNew}
+                                />
+                              </DialogDescription>
+                              <DialogFooter>
+                                <Button onClick={async () => {
+                                  const { error } = await supabase
+                                  .from('Executive_Summary')
+                                  .update({ brief_description: briefDescNew })
+                                  .eq('user_email', session.user?.email);
+                                  toast("Changes saved successfully!")
+                                }}>Save Changes</Button>
+                              </DialogFooter>
+                            </DialogContent>
+                          </Dialog>
+                          {/* <Button className='bg-transparent border text-white hover:bg-transparent hover:border-white cursor-pointer'>Edit with AI</Button> */}
                         </>
                       )}
                     </span>
@@ -230,8 +289,31 @@ function ExecutiveSummary() {
                           <Button onClick={() => {
                             handleCopy(uvp);
                           }} className='mr-2'>Copy</Button>
-                          <Button className='mr-2' variant={'secondary'}>Edit</Button>
-                          <Button className='bg-transparent border text-white hover:bg-transparent hover:border-white cursor-pointer'>Edit with AI</Button>
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button className='mr-2' variant={'secondary'}>Edit</Button>
+                            </DialogTrigger>
+                            <DialogContent className='dark'>
+                              <DialogTitle className='mb-5 mt-2'>Edit Unique Value Proposition</DialogTitle>
+                              <DialogDescription>
+                                <Textarea
+                                  onChange={(e) => setUVPNew(e.target.value)}
+                                  value={uvpNew || uvp}
+                                />
+                              </DialogDescription>
+                              <DialogFooter>
+                                <Button onClick={async () => {
+                                  const { error } = await supabase
+                                    .from('Executive_Summary')
+                                    .update({ uvp: uvpNew || uvp })
+                                    .eq('user_email', session.user?.email);
+                                  toast("Changes saved successfully!");
+                                  setUVP(uvpNew);
+                                }}>Save Changes</Button>
+                              </DialogFooter>
+                            </DialogContent>
+                          </Dialog>
+                          {/* <Button className='bg-transparent border text-white hover:bg-transparent hover:border-white cursor-pointer'>Edit with AI</Button> */}
                         </>
                       )}
                     </span>
@@ -263,8 +345,31 @@ function ExecutiveSummary() {
                           <Button onClick={() => {
                             handleCopy(targetAudience);
                           }} className='mr-2'>Copy</Button>
-                          <Button className='mr-2' variant={'secondary'}>Edit</Button>
-                          <Button className='bg-transparent border text-white hover:bg-transparent hover:border-white cursor-pointer'>Edit with AI</Button>
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button className='mr-2' variant={'secondary'}>Edit</Button>
+                            </DialogTrigger>
+                            <DialogContent className='dark'>
+                              <DialogTitle className='mb-5 mt-2'>Edit Target Audience</DialogTitle>
+                              <DialogDescription>
+                                <Textarea
+                                  onChange={(e) => setTargetAudienceNew(e.target.value)}
+                                  value={targetAudienceNew || targetAudience}
+                                />
+                              </DialogDescription>
+                              <DialogFooter>
+                                <Button onClick={async () => {
+                                  const { error } = await supabase
+                                    .from('Executive_Summary')
+                                    .update({ target_audience: targetAudienceNew || targetAudience })
+                                    .eq('user_email', session.user?.email);
+                                  toast("Changes saved successfully!");
+                                  setTargetAudience(targetAudienceNew);
+                                }}>Save Changes</Button>
+                              </DialogFooter>
+                            </DialogContent>
+                          </Dialog>
+                          {/* <Button className='bg-transparent border text-white hover:bg-transparent hover:border-white cursor-pointer'>Edit with AI</Button> */}
                         </>
                       )}
                     </span>
@@ -286,7 +391,7 @@ function ExecutiveSummary() {
               </SheetTrigger>
               <SheetContent className='dark p-6'>
                 <SheetHeader>
-                  <SheetTitle>Brief Description of your product</SheetTitle>
+                  <SheetTitle>Problem Statement</SheetTitle>
                   <SheetDescription className='mt-6'>
                     <span id="brief-description-h1" className='text-md'>
                       {problemStatement && (
@@ -296,8 +401,31 @@ function ExecutiveSummary() {
                           <Button onClick={() => {
                             handleCopy(problemStatement);
                           }} className='mr-2'>Copy</Button>
-                          <Button className='mr-2' variant={'secondary'}>Edit</Button>
-                          <Button className='bg-transparent border text-white hover:bg-transparent hover:border-white cursor-pointer'>Edit with AI</Button>
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button className='mr-2' variant={'secondary'}>Edit</Button>
+                            </DialogTrigger>
+                            <DialogContent className='dark'>
+                              <DialogTitle className='mb-5 mt-2'>Edit Problem Statement</DialogTitle>
+                              <DialogDescription>
+                                <Textarea
+                                  onChange={(e) => setProblemStatementNew(e.target.value)}
+                                  value={problemStatementNew || problemStatement}
+                                />
+                              </DialogDescription>
+                              <DialogFooter>
+                                <Button onClick={async () => {
+                                  const { error } = await supabase
+                                    .from('Executive_Summary')
+                                    .update({ problem_statement: problemStatementNew || problemStatement })
+                                    .eq('user_email', session.user?.email);
+                                  toast("Changes saved successfully!");
+                                  setProblemStatement(problemStatementNew);
+                                }}>Save Changes</Button>
+                              </DialogFooter>
+                            </DialogContent>
+                          </Dialog>
+                          {/* <Button className='bg-transparent border text-white hover:bg-transparent hover:border-white cursor-pointer'>Edit with AI</Button> */}
                         </>
                       )}
                     </span>

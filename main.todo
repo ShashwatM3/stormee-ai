@@ -6,12 +6,25 @@ Todos:
   ✔ Implement into UVP @done(25-05-03 21:08)
   ✔ Implement into Target Audience @done(25-05-03 21:08)
   ✔ Implement into Problem Statement @done(25-05-03 21:08)
-  ☐ Make Formula for Validation Risk Report
+  ✔ Make Formula for Validation Risk Report @done(25-05-05 14:41)
   ☐ Guard and error-proof the data gathering processes for all.
 
 Small notes:
   ☐ Name of idea. How do we incorporate?
-  ☐ Making Target Audience much more detailed
+  ✔ Dynamic business components based on whether user has paid or not @done(25-05-06 11:01)
+  ☐ Making Target Audience much more detailed (and smaller)
     Or just say that more specifics are in Market Analysis
   ✔ Figure out content display => CONVERTING CHATGPT FORMAT TO NORMAL READABLE FORMAT @done(25-05-03 21:40)
   ☐ Remove any hints of text being AI-Generated
+  ✔ Consider MAKING ONE SINGLE PROMPT FOR EXECUTIVE SUMMARY @done(25-05-05 15:09)
+
+Todos for Launch:
+  ☐ Make profile work
+  ☐ Make Google Login work
+  ☐ Exporting to Google Docs
+  ☐ Remove any 'console logs' and cleanup
+  ☐ Incorporate MANUAL FILL-IN as an alternative for users.
+  ☐ Make 2 SAMPLE DASHBOARD W/ AI CHATS for user to see for themselves
+  ☐ Make Demo Video
+
+

@@ -37,14 +37,6 @@ function DashboardPage() {
   // }, [router, status])
 
   useEffect(() => {
-    const dt = document.getElementById("dashboard-ticker");
-    if(dt) {
-      dt.style.display="flex"
-    }
-    const dp = document.getElementById("dashboard-page");
-    if(dp) {
-      dp.style.opacity="0"
-    }
     setTimeout(() => {
       const dt = document.getElementById("dashboard-ticker");
       if(dt) {
@@ -54,7 +46,7 @@ function DashboardPage() {
       if(dp) {
         dp.style.opacity="1"
       }
-    }, 7000);
+    }, 1000);
   })
 
   return (
