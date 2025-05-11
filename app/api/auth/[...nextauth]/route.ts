@@ -2,6 +2,7 @@
 import NextAuth, { DefaultSession, AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { JWT } from "next-auth/jwt";
+import { NextRequest } from "next/server";
 
 // Extend the built-in session type
 declare module "next-auth" {
@@ -71,6 +72,13 @@ export const authOptions: AuthOptions = {
   },
 };
 
-// This is the correct way to export for App Router
 const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
+
+// Export the route handlers with proper Next.js App Router types
+export async function GET(request: NextRequest) {
+  return handler(request);
+}
+
+export async function POST(request: NextRequest) {
+  return handler(request);
+}
