@@ -10,6 +10,7 @@ Todos:
   ☐ Guard and error-proof the data gathering processes for all.
 
 Small notes:
+  ☐ Making Structure for Validation Report -> Tutorial. Miro.
   ☐ Name of idea. How do we incorporate?
   ✔ Dynamic business components based on whether user has paid or not @done(25-05-06 11:01)
   ☐ Making Target Audience much more detailed (and smaller)
@@ -17,6 +18,11 @@ Small notes:
   ✔ Figure out content display => CONVERTING CHATGPT FORMAT TO NORMAL READABLE FORMAT @done(25-05-03 21:40)
   ☐ Remove any hints of text being AI-Generated
   ✔ Consider MAKING ONE SINGLE PROMPT FOR EXECUTIVE SUMMARY @done(25-05-05 15:09)
+  ☐ Add icon to Muse AI
+
+Once you have finished above and below, and I mean FINISH:
+  ☐ Post on X
+  ☐ Start preparing for ProductHunt
 
 Todos for Launch:
   ☐ Make profile work
@@ -27,4 +33,8 @@ Todos for Launch:
   ☐ Make 2 SAMPLE DASHBOARD W/ AI CHATS for user to see for themselves
   ☐ Make Demo Video
 
+Optimizations:
+  ☐ Calling session and supabase ("User") only once
 
+Failsafes:
+  ☐ If the user tries to go to any page, MAKE SURE PROPER MECHANISMS ARE IN PLACE

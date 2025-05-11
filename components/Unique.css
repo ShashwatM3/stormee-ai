@@ -1,0 +1,121 @@
+.unique-main {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.unique-main > h4 {
+  border: 1px solid rgb(80, 80, 80);
+  background: rgb(17, 17, 17);
+  padding: 8px 20px;
+  border-radius: 25px;
+  margin-bottom: 15px;
+}
+
+.unique-main > h1 {
+  margin-bottom: 15px;
+}
+
+.unique-main > h3 {
+  opacity: 70%;
+  font-family: "poppins";
+}
+
+#unique1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 30vh;
+  margin-bottom: 20px;
+}
+
+#unique1 > div:nth-child(1) {
+  width: 50%;
+  height: 100%;
+  border-radius: 15px;
+  margin-right: 15px;
+}
+
+#unique1 > div:nth-child(2) {
+  width: 50%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+#unique2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 30vh;
+  margin-bottom: 20px;
+}
+
+#unique2 > div:nth-child(2) {
+  width: 50%;
+  border-radius: 15px;
+  height: 100%;
+}
+
+#unique2 > div:nth-child(1) {
+  width: 50%;
+  height: 100%;
+  border-radius: 15px;
+  margin-right: 15px;
+}
+
+#unique1 > div {
+  background: rgb(26, 26, 26);
+  border: 1px solid rgb(61, 61, 61);
+}
+
+#unique2 > div {
+  border: 1px solid rgb(61, 61, 61);
+  background: rgb(26, 26, 26);
+}
+
+#unique1 > div, #unique2 > div {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-direction: column;
+  transition: 0.3s ease-in-out;
+  background: rgba( 255, 255, 255, 0 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border: 1px solid rgb(57, 57, 57);
+  padding: 30px;
+}
+
+#unique1 > div > h1, #unique2 > div > h1 {
+  font-size: 3vh;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+#unique1 > div > h3, #unique2 > div > h3 {
+  font-family: "Poppins", sans-serif;
+  opacity: 60%;
+}
+
+#unique2 > div:hover {
+  background: rgb(34, 34, 34);
+  /* color: black; */
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+
+#unique1 > div:hover {
+  background: rgb(34, 34, 34);
+  /* color: black; */
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}

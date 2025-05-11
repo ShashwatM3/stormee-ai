@@ -7,7 +7,13 @@ import { useSession } from "next-auth/react";
 import AIChat from "@/components/AIChat";
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import "./styles.css"
+import "./styles.css";
+import HIW from "@/components/HIW";
+import TLDR from "@/components/TLDR";
+import NPD from "@/components/NPD";
+import GotAnidea from "@/components/GotAnidea"
+import FeatureMap from "@/components/FeatureMap"
+import Unique from "@/components/Unique";
 
 export default function Home() {
   const router = useRouter();
@@ -37,6 +43,16 @@ export default function Home() {
     <div id="main">
       <Nav/>
       <Banner/>
+      <TLDR/>
+      <HIW/>
+      <NPD/><br/><br/><br/>
+      <Unique/><br/><br/><br/>
+      <FeatureMap/><br/><br/><br/>
+      <GotAnidea/>
+      <br/><br/><br/>
+      <div className="w-full bg-black text-white text-center p-4 cursor-pointer">
+        Built by <u onClick={() => {window.open("https://shashwatm.vercel.app/", "_self")}}>Shashwat M</u>
+      </div>
     </div>
     </>
   );

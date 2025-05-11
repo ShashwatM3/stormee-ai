@@ -12,35 +12,53 @@ export async function POST(req) {
       );
     }
 
-    console.log('Making request to OpenAI API...');
+    console.log('Making request to OpenRouter API...');
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${process.env.NEXT_PUBLIC_KEY}`,
         'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://stormee.ai', // Required by OpenRouter
+        'X-Title': 'Stormee AI' // Optional, but recommended
       },
       body: JSON.stringify({
         model: 'deepseek/deepseek-chat-v3-0324:free',
-        // model: 'deepseek/deepseek-r1:free',
         messages,
         stream: false,
-        // max_tokens: 20,
         temperature: 0.7,
       }),
     });
 
     if (!response.ok) {
       const error = await response.json();
-      console.error('OpenAI API error:', error);
+      console.error('OpenRouter API error:', error);
       return Response.json(
-        { error: error.message || 'Failed to fetch from OpenAI' },
+        { error: error.message || 'Failed to fetch from OpenRouter' },
         { status: response.status }
       );
     }
 
     const data = await response.json();
-    console.log('OpenAI API response:', data);
-    return Response.json(data);
+    console.log('OpenRouter API response:', data);
+
+    // Check if the response has the expected format
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+      console.error('Unexpected response format:', data);
+      return Response.json(
+        { error: 'Unexpected response format from OpenRouter' },
+        { status: 500 }
+      );
+    }
+
+    // Return the response in the expected format
+    return Response.json({
+      choices: [{
+        message: {
+          role: 'assistant',
+          content: data.choices[0].message.content
+        }
+      }]
+    });
   } catch (error) {
     console.error('Chat API error:', error);
     return Response.json(

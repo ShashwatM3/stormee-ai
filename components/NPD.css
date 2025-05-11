@@ -1,0 +1,33 @@
+.npd-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100%;
+}
+
+.npd-main > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+}
+
+#active {
+  background: white;
+  color: black;
+}
+
+#withoutStormee, #withStormee {
+  transition: 0.2s ease-in-out;
+}
+
+#withStormee {
+  display: none;
+}
+
+#nonactive {
+  background: black;
+  color: white;
+}

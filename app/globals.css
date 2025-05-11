@@ -148,7 +148,9 @@
 }
 
 body {
-  background: rgb(16, 16, 16);
+  background: rgb(14, 14, 14);
+  background: #111111;
+/* background: linear-gradient(180deg, rgba(17, 17, 17, 1) 0%, rgba(0, 0, 51, 1) 76%); */
   color: white;
 }
 

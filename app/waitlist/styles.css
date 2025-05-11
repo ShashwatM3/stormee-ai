@@ -1,0 +1,67 @@
+.waitlist-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  width: 100vw;
+  animation: fadeIn 1s;
+}
+
+.waitlist-main > div {
+  width: 40vw;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 60px;
+  border: 1px solid rgb(60, 60, 60);
+  background: rgba( 255, 255, 255, 0 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border: 1px solid rgb(57, 57, 57);
+  border-radius: 25px;
+  transition: 0.3s ease-in-out;
+}
+
+.waitlist-main > div:hover {
+  background: rgba( 255, 255, 255, 0 );
+  box-shadow: 0 8px 32px 0 rgba(62, 193, 229, 0.448);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border: 1px solid rgb(57, 57, 57);
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.waitlist-main > div > h1 {
+  margin-bottom: 20px;
+}
+
+.waitlist-main > div > h2 {
+  margin-bottom: 30px;
+  font-weight: 200;
+}
+
+.waitlist-main > div > h3 {
+  color: rgb(165, 165, 165);
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.waitlist-main > div > div > input {
+  width: 50%;
+  background: rgb(33, 33, 33);
+  border: none;
+  outline: none;
+  color: white;
+}
+
+#s2 {
+  display: none;
+}

@@ -7,7 +7,7 @@ import "./styles.css";
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import supabase from '../config/supabaseClient'
 
 function Authentication() {
@@ -15,6 +15,7 @@ function Authentication() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const {session, status} = useSession();
   
   const router = useRouter();
 
@@ -24,17 +25,8 @@ function Authentication() {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (emailRegex.test(em.value)) {
         setEmail(em.value);
-        const { data: data2, error: error2 } = await supabase
-        .from('Users')
-        .select()
-        .eq('email', session.user?.email);
-        if(data2.length==0) {
-          document.getElementById("stage-one").style.display = "none";
-          document.getElementById("stage-two").style.display = "flex";
-        } else {
-          alert("There is already an account with this email address.")
-        }
-        // Hide stage one and show stage two
+        document.getElementById("stage-one").style.display = "none";
+        document.getElementById("stage-two").style.display = "flex";
       } else {
         alert("Please enter a valid email address");
       }
@@ -74,7 +66,8 @@ function Authentication() {
           Competitor_Analysis: '',
           SWOT_Analysis: '',
           Growth_Strategy: '',
-          End_To_End: ''
+          End_To_End: '',
+          Stage: 1,
         })
       console.log(error);
   

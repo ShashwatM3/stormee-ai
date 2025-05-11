@@ -282,7 +282,7 @@ You must strictly respond with the following JSON Format with no extra text or m
               <h3>Welcome to Muse AI - Brainstorm and Ideation</h3>
               <h1>
               <MemoizedTextAnimate animation="blurInUp" by="character" once>
-                How can I help?
+                Let's Brainstorm.
               </MemoizedTextAnimate>
               </h1>
               <div className='flex gap-5 items-center'>

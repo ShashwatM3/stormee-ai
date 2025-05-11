@@ -1,0 +1,35 @@
+.feature-map-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+  flex-direction: column;
+}
+
+.feature-map-main > div {
+  width: 70%;
+  text-align: center;
+}
+
+.feature-map-main > div > h1 {
+  margin-bottom: 20px;
+}
+
+.feature-map-main > div > h3 {
+  font-size: 2.5vh;
+  font-weight: 200;
+}
+
+.features {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.features > div {
+  width: 20vw;
+  text-align: left;
+}
