@@ -4,10 +4,10 @@ export async function POST(req) {
     const { messages } = await req.json();
     console.log('Received messages:', messages);
 
-    if (!process.env.NEXT_PUBLIC_KEY) {
-      console.error('OpenAI API key is missing');
+    if (!process.env.OPENROUTER_API_KEY) {
+      console.error('OpenRouter API key is missing');
       return Response.json(
-        { error: 'OpenAI API key is not configured' },
+        { error: 'OpenRouter API key is not configured' },
         { status: 500 }
       );
     }
@@ -16,7 +16,7 @@ export async function POST(req) {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_KEY}`,
+        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': 'https://stormee.ai', // Required by OpenRouter
         'X-Title': 'Stormee AI' // Optional, but recommended

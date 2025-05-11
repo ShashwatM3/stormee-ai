@@ -98,6 +98,7 @@
   font-family: "Poppins", sans-serif;
   line-height: 110%;
   margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .banner-main > div:nth-child(1) > div > h1 > span:nth-child(1) {
