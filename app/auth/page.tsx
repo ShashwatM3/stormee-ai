@@ -6,7 +6,7 @@ function page() {
   return (
     <div>
       <Nav/>
-      <Authentication/>
+      {/* <Authentication/> */}
     </div>
   )
 }
