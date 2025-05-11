@@ -1,8 +1,27 @@
 // app/api/auth/[...nextauth]/route.ts
-import NextAuth from "next-auth";
+import NextAuth, { DefaultSession, AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { JWT } from "next-auth/jwt";
 
-export const authOptions = {
+// Extend the built-in session type
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+    } & DefaultSession["user"]
+  }
+}
+
+// Extend the built-in JWT type
+declare module "next-auth/jwt" {
+  interface JWT {
+    user?: {
+      id: string;
+    } & DefaultSession["user"]
+  }
+}
+
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -15,7 +34,11 @@ export const authOptions = {
         if (!credentials) return null;
         const { email, password, username } = credentials;
 
-        const user = { id: "1", email, name: username };
+        const user = { 
+          id: "1", 
+          email, 
+          name: username 
+        };
 
         if (user) return user;
         return null;
@@ -23,19 +46,23 @@ export const authOptions = {
     }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
     maxAge: 30 * 24 * 60 * 60,
   },
   jwt: {
     maxAge: 30 * 24 * 60 * 60,
   },
   callbacks: {
-    async jwt({ token, user }: { token: any; user: any }) {
-      if (user) token.user = user;
+    async jwt({ token, user }) {
+      if (user) {
+        token.user = user;
+      }
       return token;
     },
-    async session({ session, token }: { session: any; token: any }) {
-      session.user = token.user;
+    async session({ session, token }) {
+      if (token.user) {
+        session.user = token.user;
+      }
       return session;
     },
   },
@@ -45,11 +72,5 @@ export const authOptions = {
 };
 
 // This is the correct way to export for App Router
-const handler = NextAuth({
-  ...authOptions,
-  session: {
-    strategy: "jwt" as const,
-    maxAge: 30 * 24 * 60 * 60,
-  }
-});
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
