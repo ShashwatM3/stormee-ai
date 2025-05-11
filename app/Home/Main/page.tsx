@@ -7,16 +7,16 @@ import supabase from '@/app/config/supabaseClient';
 import { useRouter } from 'next/navigation';
 import "./Dashboardstyles.css"
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+// import {
+//   Dialog,
+//   DialogContent,
+//   DialogDescription,
+//   DialogHeader,
+//   DialogTitle,
+//   DialogTrigger,
+// } from "@/components/ui/dialog"
 
-function page() {
+function Page() {
   type User = {
     id: number,
     email: string,
@@ -114,4 +114,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

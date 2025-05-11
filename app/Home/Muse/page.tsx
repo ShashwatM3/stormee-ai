@@ -7,7 +7,7 @@ import supabase from '@/app/config/supabaseClient';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-function page() {
+function Page() {
   const router = useRouter();
   const { data: session, status } = useSession();
   async function fetchSupaData() {
@@ -47,4 +47,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

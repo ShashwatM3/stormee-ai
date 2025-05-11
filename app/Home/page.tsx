@@ -7,7 +7,7 @@ import AIChat from "@/components/AIChat"
 import Nav from '@/components/Nav';
 import HomePage from "./HomePage";
 
-function page() {
+function Page() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -23,5 +23,5 @@ function page() {
       <HomePage/>
     </div>
   )
-}export default page
+}export default Page
 

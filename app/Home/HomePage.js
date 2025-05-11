@@ -22,7 +22,7 @@ import inprogress from "@/components/icons/inprogress.png"
 function HomePage() {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [tutorial, setTutorial] = useState(false);
+  // const [tutorial, setTutorial] = useState(false);
   const [stage, setStage] = useState("");
   const [currentStage, setCurrentStage] = useState("validation")
   

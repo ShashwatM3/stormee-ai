@@ -1,11 +1,11 @@
 "use client"
 
-import supabase from '@/app/config/supabaseClient';
+// import supabase from '@/app/config/supabaseClient';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import "./Dashboardstyles.css";
-import Nav from '@/components/Nav';
+// import Nav from '@/components/Nav';
 import rocket from "@/components/icons/rocket.png"
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -37,6 +37,7 @@ function DashboardPage() {
   // }, [router, status])
 
   useEffect(() => {
+    console.log(status)
     setTimeout(() => {
       const dt = document.getElementById("dashboard-ticker");
       if(dt) {
