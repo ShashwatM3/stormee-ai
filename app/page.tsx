@@ -20,9 +20,9 @@ export default function Home() {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/Home");
-    }
+    // if (status === "authenticated") {
+    //   router.push("/Home");
+    // }
     console.log(session);
     setTimeout(() => {
       const m = document.getElementById("main");
@@ -51,7 +51,7 @@ export default function Home() {
       <GotAnidea/>
       <br/><br/><br/>
       <div className="w-full bg-black text-white text-center p-4 cursor-pointer">
-        Built by <u onClick={() => {window.open("https://shashwatm.vercel.app/", "_self")}}>Shashwat M</u>
+        Built by <a onClick={() => {window.open("https://shashwatm.vercel.app/", "_self")}}>Shashwat M</a>
       </div>
     </div>
     </>

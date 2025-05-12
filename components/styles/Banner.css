@@ -76,12 +76,17 @@
 
 .banner-main {
   display: flex; 
-  height: 90vh;
+  height: 100vh;
   width: 100vw;
+  align-items: center;
+  background: rgb(17, 17, 17);
+  background: linear-gradient(0deg, rgb(17, 17, 17) 60%, rgba(10, 10, 112, 1) 100%);
+  justify-content: center;
 }
 
 .banner-main > div {
-  width: 50%;
+  width: 70%;
+  text-align: center;
   height: 100%;
   display: flex;
   align-items: center;
@@ -91,6 +96,10 @@
 
 .banner-main > div:nth-child(1) > div {
   width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .banner-main > div:nth-child(1) > div > h1 {
@@ -110,6 +119,7 @@
   font-family: "Poppins", sans-serif;
   opacity: 70%;
   margin-bottom: 20px;
+  width: 505;
 }
 
 .banner-main > div:nth-child(2) > div {
