@@ -128,3 +128,30 @@
   background: rgb(52, 52, 52);
   border-radius: 15px;
 }
+
+@media only screen and (max-width: 900px) {
+  .banner-main > div {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .banner-main > div:first-child > div > h3 {
+    font-size: 2vh;
+    width: 90%;
+  }
+
+  .banner-main > div {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .banner-main > div:first-child > div > h1 {
+    font-size: 4vh;
+  }
+
+  .banner-main {
+    height: 90vh
+  }
+}

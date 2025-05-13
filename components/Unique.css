@@ -29,7 +29,7 @@
   align-items: center;
   justify-content: center;
   width: 80%;
-  height: 30vh;
+  height: 40vh;
   margin-bottom: 20px;
 }
 
@@ -51,7 +51,7 @@
   align-items: center;
   justify-content: center;
   width: 80%;
-  height: 30vh;
+  height: 40vh;
   margin-bottom: 20px;
 }
 
@@ -118,4 +118,55 @@
   /* color: black; */
   transition: 0.3s ease-in-out;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 800px) {
+  #unique1 > div > h3, #unique2 > div > h3 {
+    font-size: 1.8vh;
+  }
+
+  #unique1 > div > h1, #unique2 > div > h1 {
+    font-size: 2.5vh;
+    line-height: 120%;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  #unique1, #unique2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  #unique1 {
+    margin-bottom: 13vh;
+    margin-top: 30px;
+  }
+
+  #unique1 > div:first-child {
+    width: 100%;   
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  #unique1 > div:nth-child(2) {
+    width: 100%;
+  }
+
+  #unique2 > div:nth-child(2) {
+    width: 100%;
+  }
+
+  #unique2 > div:nth-child(1) {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .unique-main > h1 {
+    font-size: 4vh;
+  }
 }

@@ -14,7 +14,6 @@ function TLDR() {
             <li>An clear/unclear Idea</li>
             <li>No Business Plan</li>
             </ul>
-            <Button className='mt-3 dark cursor-pointer'>View Use Cases</Button>
           </div>
           <div>
             <h3 className='scroll-m-20 text-2xl font-semibold tracking-tight'>What we give the founder</h3>
@@ -24,7 +23,12 @@ function TLDR() {
             <li>Investor and Pitch-ready business plan</li>
             <li>AI-Powered Iterative Optimization of idea</li>
             </ul>
-            <Button variant='ghost' className='mt-3 dark border cursor-pointer'>View Demos</Button>
+            <Button onClick={() => {
+              const el = document.getElementById("hiw-main");
+              if(el) {
+                el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }
+            }} variant='ghost' className='mt-3 dark border cursor-pointer'>How do we incorporate this</Button>
           </div>
         </div>
       </div>

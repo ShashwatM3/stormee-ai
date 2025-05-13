@@ -20,6 +20,10 @@
   padding: 40px;
 }
 
+.buttonTLDR {
+  content: "How do we incorporate this"
+}
+
 .tldr-con > div {
   display: flex;
   align-items: flex-start;
@@ -46,4 +50,40 @@
 .tldr-con li {
   margin-bottom: 10px;
   line-height: 1.5;
+}
+
+@media only screen and (max-width: 800px) {
+  .tldr-con > h1 {
+    font-size: 3vh;
+  }
+
+  .tldr-con > div > div > h3 {
+    font-size: 2vh;
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .tldr-con {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 490px) {
+  .tldr-con > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .tldr-con > div > div {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .tldr-con li {
+    font-size: 1.7vh;
+  }
 }

@@ -15,6 +15,7 @@ import Image from 'next/image';
 
 function HIW() {
   const [current, setCurrent] = useState(0);
+  const [expanded, setExpanded] = useState([false, false, false]);
   const slides = [
     {
       ima: st1 
@@ -56,7 +57,7 @@ function HIW() {
   };
   
   return (
-    <div className='hiw-main'>
+    <div className='hiw-main' id="hiw-main">
       <div>
         <div>
           <div>
@@ -69,7 +70,22 @@ function HIW() {
               }
             }}>
               <h1>1. Brainstorm with Muse AI</h1>
-              <h3>This is the first stage of Stormee AI. The founder would be able to brainstorm with a creative AI assistant who helps you find critical aspects of your idea. This stage is where you can give your idea clarity. You may also choose to answer pre-defined questions manually to express as much as you wish.</h3>
+              <h3>
+              {expanded[0]
+                ? "This is the first stage of Stormee AI. The founder would be able to brainstorm with a creative AI assistant who helps you find critical aspects of your idea. This stage is where you can give your idea clarity. You may also choose to answer pre-defined questions manually to express as much as you wish."
+                : "This is the first stage of Stormee AI. The founder would be able to brainstorm with a creative AI assistant who helps you find critical aspects of your idea..."}
+              <span
+                onClick={(e) => {
+                  e.stopPropagation(); // so it doesn't trigger the carousel change
+                  const newExpanded = [...expanded];
+                  newExpanded[0] = !newExpanded[0];
+                  setExpanded(newExpanded);
+                }}
+                style={{ color: "green", cursor: "pointer", marginLeft: "5px" }}
+              >
+                {expanded[0] ? "Read Less" : "Read More"}
+              </span>
+            </h3>
             </div>
             <div id="hiw-2" onClick={() => {
               if(current==0) {
@@ -79,7 +95,22 @@ function HIW() {
               }
             }}>
               <h1>2. Get Validation Report</h1>
-              <h3>This is the second stage of Stormee AI. Once the idea has been defined, Stormee AI will generate a concise, simple but powerful Validation Report that tells the founder:<b>Will your idea work or not? Why/Why not?</b><br/><br/> The founder may refine their idea even further with Muse AI if they aren't satisfied.</h3>
+              <h3>
+                {expanded[1]
+                  ? "This is the second stage of Stormee AI. Once the idea has been defined, Stormee AI will generate a concise, simple but powerful Validation Report that tells the founder: Will your idea work or not? Why/Why not? The founder may refine their idea even further with Muse AI if they aren't satisfied."
+                  : "This is the second stage of Stormee AI. Once the idea has been defined, Stormee AI will generate a concise, simple but powerful Validation Report that tells the founder..."}
+                <span
+                  onClick={(e) => {
+                    e.stopPropagation(); // so it doesn't trigger the carousel change
+                    const newExpanded = [...expanded];
+                    newExpanded[1] = !newExpanded[1];
+                    setExpanded(newExpanded);
+                  }}
+                  style={{ color: "green", cursor: "pointer", marginLeft: "5px" }}
+                >
+                  {expanded[0] ? "Read Less" : "Read More"}
+                </span>
+              </h3>
             </div>
             <div id="hiw-3" onClick={() => {
               if(current==0) {
@@ -89,7 +120,22 @@ function HIW() {
               }
             }}>
               <h1>3. Founder Dashboard</h1>
-              <h3>Once the user is satisfied with the validation report as well as their own idea, they access their personal Founder Dashboard where every critical aspect of the idea would be listed.</h3>
+              <h3>
+                {expanded[2]
+                  ? "Once the user is satisfied with the validation report as well as their own idea, they access their personal Founder Dashboard where every critical aspect of the idea would be listed."
+                  : "Once the user is satisfied with the validation report as well as their own idea, they access..."}
+                <span
+                  onClick={(e) => {
+                    e.stopPropagation(); // so it doesn't trigger the carousel change
+                    const newExpanded = [...expanded];
+                    newExpanded[2] = !newExpanded[2];
+                    setExpanded(newExpanded);
+                  }}
+                  style={{ color: "green", cursor: "pointer", marginLeft: "5px" }}
+                >
+                  {expanded[0] ? "Read Less" : "Read More"}
+                </span>
+              </h3>
             </div>
           </div>
         </div>

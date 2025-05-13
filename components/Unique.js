@@ -25,7 +25,7 @@ function Unique() {
         <div id="unique2">
           <div>
             <h1>Not a Tool. Not a convenience. Stage-wise Structure ✅</h1>
-            <h3>Unlike our competitors, we <b>don't</b> just take in ideas and throw random content at the users. They are founders, and we lead the founders through a structured process guiding them through onboarding. idea solidification. validation. business planning.</h3>
+            <h3>We guide founders through a structured journey: onboarding, idea solidification, validation, and business planning, without "throwing" content at them</h3>
           </div>
           <div>
             <h1>Not just output. We go Beyond. 🧐</h1>
