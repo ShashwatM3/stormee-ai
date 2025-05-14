@@ -81,7 +81,7 @@ function Page() {
           }} className='dark' variant='secondary'>Back to Home</Button>
         </div>
         <div id="s2">
-          <Button className='w-full bg-transparent border border-neutral-700 mb-3'>You're<span id="already"></span>on the waitlist ⚡️</Button>
+          <Button className='w-full bg-transparent border border-neutral-700 mb-3'>You're on the waitlist ⚡️</Button>
           <h2 className='opacity-[50%]'>P.S. You'll get a 20% discount 🎉</h2>
         </div>
       </div>
