@@ -9,7 +9,7 @@ function Unique() {
     <div id="unique-main" className='unique-main'>
       <h4>Setting us apart</h4>
       <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl'>What makes us different?</h1>
-      <h3>Why shouldn't YOU go to our competitors...</h3>
+      <h3>Why shouldn't YOU go to our competitors...</h3><br/>
       <br/>
       <div className='flex items-center justify-center flex-col w-full'>
         <div id="unique1">
