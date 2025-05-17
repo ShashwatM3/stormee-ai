@@ -15,7 +15,7 @@ function Unique() {
         <div id="unique1">
           <div>
             <h1>Speed/Quality of Execution ⚡️</h1>
-            <h3>This platform is <b>serves to user, instead of leaving the user mid-way</b> Instead of frameworks or templates, we deliver <b>pitch-ready blueprints.</b></h3>
+            <h3>This platform <b>serves to user, instead of leaving the user mid-way</b> Instead of frameworks or templates, we deliver <b>pitch-ready blueprints.</b></h3>
           </div>
           <div>
             <h1>Built-in Critical Feedback 🧠</h1>
