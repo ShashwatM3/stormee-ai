@@ -49,7 +49,7 @@ function Banner() {
           <h3>Use Stormee AI to give your idea a spine, through a stage-wise structured process. Jumpstart your product development journey.</h3>
           <div className='flex gap-2'>
             <Button onClick={() => {
-              router.push("/waitlist")
+              router.push("/auth")
             }} className='dark'>Get Started</Button>
             <Button onClick={() => {
               const el = document.getElementById("unique-main");

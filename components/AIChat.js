@@ -24,94 +24,67 @@ const MemoizedTextAnimate = memo(TextAnimate);
 function AIChat() {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [realWorldDemand, setRealWorldDemand] = useState('');
-  const [marketAnalysis, setMarketAnalysis] = useState('');
-  const [competitorAnalysis, setCompetitorAnalysis] = useState('');
-  const [swotAnalysis, setSwotAnalysis] = useState('');
-  const [growthStrategy, setGrowthStrategy] = useState('');
-  // const [fundingGuidance, setFundingGuidance] = useState('');
+  const [targetAudience, setTargetAudience] = useState('');
+  const [problem, setProblem] = useState('');
+  const [unique, setUnique] = useState('');
+  const [features, setFeatures] = useState('');
   const [endToEndDescription, setEndToEndDescription] = useState('');
   const [finalized, setFinalized] = useState(false);
-  const [next, setNext] = useState(false)
+  const [next, setNext] = useState(false);
 
   const fieldValues = {
-    realWorldDemand,
-    marketAnalysis,
-    competitorAnalysis,
-    swotAnalysis,
-    growthStrategy,
-    // fundingGuidance,
+    targetAudience,
+    problem,
+    unique,
+    features,
     endToEndDescription
   };
-  
+
   const roleAI = `
-You are a business development assistant who uses the maximum of your brainstorming capabilities. Your sole purpose and range of tasks is to help users brainstorm and outline a business idea.
+You are a business brainstorming assistant who uses the maximum of your creative capabilities. Your sole purpose and range of tasks is to help users brainstorm and outline a business idea.
 
-Your responses must help the user understand and develop the following 6 core components:
+Your responses must help the user understand and develop the following core components:
+1. their idea in one line which is detailed and not general (As referred to field OneLineIdea in the JSON Format)
+2. Target Audience (As referred to field TargetAudience in the JSON Format)
+3. Problem they are solving (As referred to field Problem in the JSON Format)
+4. What makes their idea unique (As referred to field Unique in the JSON Format)
+5. Key Features of their solution (As referred to field Features in the JSON Format)
+6. End-to-End Description (As referred to EndToEndDescription in the JSON Format)
 
-1. Target Audience
-2. Market Analysis
-3. Competitor Analysis
-4. SWOT Analysis
-5. Growth Strategy
-6. End-to-End Description
-
-Rules for Response:
-
-1. DO NOT say things like "Here's your response". STRICTLY ONLY send the JSON object.
-2. DO NOT use code formatting like \`\`\`json..
-3. Keep conversational text (your_response) friendly but sharp.
-4. You must lead the user through the brainstorming process, and take control
-5. Always speak in a friendly, professional, and focused tone.
-6. Always ask smart, probing questions specifically designed to complete the missing fields. Each field must have a clear and direct statement that pertains to the idea. DO NOT only ask questions and SOMETIMES provide your own opinion
-7. Ask smart, probing questions specifically designed to complete the missing core components
-8. If the user provides an uncertain reply, provide your own opinion and verify with the user if it it satisfies them 
-9. Your reply must only guide toward completing all 7 components.
+Rules for Response: DO NOT say things like "Here's your response". STRICTLY ONLY send the JSON object. Keep conversational text (your_response) friendly but sharp. You must lead the user through the brainstorming process, and take control. ALWAYS ASK A QUESTION AT THE END OF YOUR REPLY. Always speak in a friendly, professional, and focused tone. Always ask smart, probing questions specifically designed to complete the missing fields. Each field must have a clear and direct statement that pertains to the idea. DO NOT only ask questions and SOMETIMES provide your own opinion. If the user provides an uncertain reply, provide your own opinion and verify with the user if it satisfies them. Assume the user HAS A VERY VAGUE IDEA ABOUT THEIR OWN IDEA.
 
 Output Format:
 
 You must strictly respond with the following JSON Format with no extra text or markdown:
 
 {
-
-"your_response": "Conversational reply to the user with guidance, probing questions, or summaries that you must strictly synthesize MAXIMUM UPTO 14 WORDS.",
-
-"RealWorldDemand": "If completed, fill the analysis; otherwise, 'Awaiting further input.'",
-
-"MarketAnalysis": "If completed, fill the analysis; otherwise, 'Awaiting further input.'",
-
-"CompetitorAnalysis": "If completed, fill the analysis; otherwise, 'Awaiting further input.'",
-
-"SWOTAnalysis": "If completed, fill the analysis; otherwise, 'Awaiting further input.'",
-
-"GrowthStrategy": "If completed, fill the strategy; otherwise, 'Awaiting further input.'",
-
-"EndToEndDescription": "If all components are complete, generate full description; otherwise, 'Awaiting further input.'",
-
-"finalized": "If RealWorldDemand MarketAnalysis CompetitorAnalysis SWOTAnalysis GrowthStrategy EndToEndDescription fields of JSON are completed, and the user is completely fine with the respective content of each, this will have a true value. This should be false if the two conditions I mentioned right now are not met ."
-
+  "your_response": "Friendly conversational guidance or follow-up question. Write as if speaking to a startup founder. Only and strictly upto 14 words of a response.",
+  "OneLineIdea": "If completed, fill the analysis; otherwise, 'Awaiting further input.'",
+  "TargetAudience": "If completed, fill the analysis; otherwise, 'Awaiting further input.'",
+  "Problem": "If completed, fill the analysis; otherwise, 'Awaiting further input.'",
+  "Unique": "If completed, fill the analysis; otherwise, 'Awaiting further input.'",
+  "Features": "If completed, fill the analysis; otherwise, 'Awaiting further input.'",
+  "EndToEndDescription": "If all components are complete, generate full description; otherwise, 'Awaiting further input.'",
+  "finalized": "If OneLineIdea, TargetAudience, Problem, Unique, Features, and EndToEndDescription fields of JSON are completed, and the user is completely fine with the respective content of each, this will have a true value. Otherwise false."
 }
-`  
+`
+
   const [messages, setMessages] = useState([]);  
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const fields = [
-    "RealWorldDemand",
-    "MarketAnalysis",
-    "CompetitorAnalysis",
-    "SWOTAnalysis",
-    "GrowthStrategy",
-    // "BasicFundingGuidance",
+    "TargetAudience",
+    "Problem",
+    "Unique",
+    "Features",
     "EndToEndDescription"
   ];
   const fieldData = {
-    realWorldDemand: "Real World Demand",
-    marketAnalysis: "Market Analysis",
-    competitorAnalysis: "Competitor Analysis",
-    swotAnalysis: "SWOT Analysis",
-    growthStrategy: "Growth Strategy",
-    // fundingGuidance: "Funding Guidance",
+    targetAudience: "Target Audience",
+    problem: "Problem Statement",
+    unique: "Unique Value Proposition",
+    features: "Key Features",
     endToEndDescription: "End-to-End Description"
   };
 
@@ -120,20 +93,19 @@ You must strictly respond with the following JSON Format with no extra text or m
       .from('Users')
       .update({ 
         Idea: 'Done',
-        Market_Analysis: marketAnalysis,
-        Real_World_Demand: realWorldDemand,
-        Competitor_Analysis: competitorAnalysis,
-        SWOT_Analysis: swotAnalysis,
-        Growth_Strategy: growthStrategy,
+        Target_Audience: targetAudience,
+        Problem: problem,
+        Unique: unique,
+        Features: features,
         End_To_End: endToEndDescription
       })
       .eq('email', `${session?.user?.email}`);
     console.log(error);
-    if(error == null) {
-      alert("Something went wrong. Try again!")
-    } else {
-      router.push("/Home")
-    }
+    // if(error == null) {
+    //   alert("Something went wrong. Try again!")
+    // } else {
+    //   router.push("/Home")
+    // }
   }
   
 
@@ -192,49 +164,59 @@ You must strictly respond with the following JSON Format with no extra text or m
               const lines = reply.content.split('\n').filter(line => line.trim());
               parsedContent = {
                 your_response: reply.content,
-                RealWorldDemand: "Awaiting further input.",
-                MarketAnalysis: "Awaiting further input.",
-                CompetitorAnalysis: "Awaiting further input.",
-                SWOTAnalysis: "Awaiting further input.",
-                GrowthStrategy: "Awaiting further input.",
-                // BasicFundingGuidance: "Awaiting further input.",
+                TargetAudience: "Awaiting further input.",
+                Problem: "Awaiting further input.",
+                Unique: "Awaiting further input.",
+                Features: "Awaiting further input.",
                 EndToEndDescription: "Awaiting further input."
               };
             }
           }
           
           const formattedReply = {
-            ...reply,
-            content: parsedContent.your_response,
+            role: 'assistant',
+            content: parsedContent.your_response.includes('**Target Audience**') ? 
+            "Let's keep refining your idea step by step. What would you like next?" : parsedContent.your_response,
             persona: 'assistant'
           };
-          if (parsedContent.RealWorldDemand !== "Awaiting further input.") {
-            setRealWorldDemand(parsedContent.RealWorldDemand);
+
+          if (parsedContent.TargetAudience !== "Awaiting further input." && parsedContent.TargetAudience?.trim() !== "") {
+            setTargetAudience(parsedContent.TargetAudience);
           }
-          if (parsedContent.MarketAnalysis !== "Awaiting further input.") {
-            setMarketAnalysis(parsedContent.MarketAnalysis);
+          if (parsedContent.Problem !== "Awaiting further input." && parsedContent.Problem?.trim() !== "") {
+            setProblem(parsedContent.Problem);
           }
-          if (parsedContent.CompetitorAnalysis !== "Awaiting further input.") {
-            setCompetitorAnalysis(parsedContent.CompetitorAnalysis);
+          if (parsedContent.Unique !== "Awaiting further input." && parsedContent.Unique?.trim() !== "") {
+            setUnique(parsedContent.Unique);
           }
-          if (parsedContent.SWOTAnalysis !== "Awaiting further input.") {
-            setSwotAnalysis(parsedContent.SWOTAnalysis);
+          if (parsedContent.Features !== "Awaiting further input." && parsedContent.Features?.trim() !== "") {
+            setFeatures(parsedContent.Features);
           }
-          if (parsedContent.GrowthStrategy !== "Awaiting further input.") {
-            setGrowthStrategy(parsedContent.GrowthStrategy);
-          }
-          // if (parsedContent.BasicFundingGuidance !== "Awaiting further input.") {
-          //   setFundingGuidance(parsedContent.BasicFundingGuidance);
-          // }
-          if (parsedContent.EndToEndDescription !== "Awaiting further input.") {
+          if (parsedContent.EndToEndDescription !== "Awaiting further input." && parsedContent.EndToEndDescription?.trim() !== "") {
             setEndToEndDescription(parsedContent.EndToEndDescription);
           }   
+          if (parsedContent.TargetAudience !== "Awaiting further input." && parsedContent.TargetAudience?.trim() !== "" && 
+              parsedContent.Problem !== "Awaiting further input." && parsedContent.Problem?.trim() !== "" && 
+              parsedContent.Unique !== "Awaiting further input." && parsedContent.Unique?.trim() !== "" && 
+              parsedContent.Features !== "Awaiting further input." && parsedContent.Features?.trim() !== "" && 
+              parsedContent.EndToEndDescription !== "Awaiting further input." && parsedContent.EndToEndDescription?.trim() !== "") {
+            setFinalized(true);
+            setMessages([...newMessages, formattedReply]);
+          }
+
           setFinalized(parsedContent.finalized);
           setMessages([...newMessages, formattedReply]);
         } catch (err) {
           console.error('Failed to parse JSON response:', err);
           console.error('Raw content that failed to parse:', reply.content);
-          setMessages([...newMessages, reply]);
+        
+          const fallbackMessage = {
+            role: 'assistant',
+            content: "Oops! Something went wrong while understanding your idea. Could you rephrase?",
+            persona: 'assistant'
+          };
+        
+          setMessages([...newMessages, fallbackMessage]);
         }
       }
     } catch (err) {
@@ -326,41 +308,33 @@ You must strictly respond with the following JSON Format with no extra text or m
         <div id="success">
           <h1>Lovely Progress!</h1>
           <h2>Muse AI has fully defined every single aspect of your idea</h2>
-          {/* <h3>Now let's do a complete market analysis of your MVP</h3> */}
           <div className='flex items-start gap-10 py-4'>
-          <div className='successitems flex items-center justify-center gap-4 flex-col'>
-            <div className='flex items-center justify-center gap-2'>
-              <Image src={tick} alt="" />
-              <span>Real-world Demand</span>
-            </div>
+            <div className='successitems flex items-center justify-center gap-4 flex-col'>
+              <div className='flex items-center justify-center gap-2'>
+                <Image src={tick} alt="" />
+                <span>Target Audience</span>
+              </div>
 
-            <div className='flex items-center justify-center gap-2'>
-              <Image src={tick} alt="" />
-              <span>Market Analysis</span>
-            </div>
+              <div className='flex items-center justify-center gap-2'>
+                <Image src={tick} alt="" />
+                <span>Problem Statement</span>
+              </div>
 
-            <div className='flex items-center justify-center gap-2'>
-              <Image src={tick} alt="" />
-              <span>Competitor Analysis</span>
-            </div>
+              <div className='flex items-center justify-center gap-2'>
+                <Image src={tick} alt="" />
+                <span>Unique Value Proposition</span>
+              </div>
 
-            <div className='flex items-center justify-center gap-2'>
-              <Image src={tick} alt="" />
-              <span>SWOT Analysis</span>
-            </div>
-          </div>
-          <div className='successitems flex items-center justify-center gap-4 flex-col'>
+              <div className='flex items-center justify-center gap-2'>
+                <Image src={tick} alt="" />
+                <span>Key Features</span>
+              </div>
 
-            <div className='flex items-center justify-center gap-2'>
-              <Image src={tick} alt="" />
-              <span>Growth Strategy</span>
+              <div className='flex items-center justify-center gap-2'>
+                <Image src={tick} alt="" />
+                <span>End-to-End Description</span>
+              </div>
             </div>
-
-            <div className='flex items-center justify-center gap-2'>
-              <Image src={tick} alt="" />
-              <span>End-to-End Description</span>
-            </div>
-          </div>
           </div>
           <br/>
           <div className='flex items-center justify-center gap-2'>

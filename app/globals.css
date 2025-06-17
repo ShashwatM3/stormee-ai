@@ -170,6 +170,16 @@ body {
   }
 }
 
+@keyframes fadeInOut {
+  0% {
+    opacity: 50%;
+  } 50% {
+    opacity: 100%;
+  } 100% {
+    opacity: 50%;
+  }
+}
+
 #fadeOutElement {
   animation: fadeOut 1s;
 }
@@ -185,4 +195,8 @@ body {
 
 #fadePop {
   animation: fadePop 1s;
+}
+
+#waveringElement {
+  animation: fadeInOut 1.8s infinite;
 }

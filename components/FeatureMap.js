@@ -57,11 +57,11 @@ function FeatureMap() {
       title: "Validation Report Viewer",
       description: "Access a detailed recap of all validation results and persona-based feedback in one place."
     },
-    {
-      key: "refine-idea",
-      title: "Refine Idea Button",
-      description: "Instantly jump back into your idea with improvements based on the validation insights."
-    },
+    // {
+    //   key: "refine-idea",
+    //   title: "Refine Idea Button",
+    //   description: "Instantly jump back into your idea with improvements based on the validation insights."
+    // },
     {
       key: "download-component",
       title: "Download Any Component",

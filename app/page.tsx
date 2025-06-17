@@ -20,9 +20,9 @@ export default function Home() {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    // if (status === "authenticated") {
-    //   router.push("/Home");
-    // }
+    if (status === "authenticated") {
+      router.push("/Home");
+    }
     console.log(session);
     setTimeout(() => {
       const m = document.getElementById("main");

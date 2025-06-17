@@ -31,7 +31,7 @@ function Unique() {
             <h1>Not just output. We go Beyond. 🧐</h1>
             <h3>We provide more than just content. We provide ways to fill gaps in the user's idea or suggest pivots for more power.</h3><br/>
             <div className='flex items-center gap-2'>
-            <Button onClick={() => {router.push("/waitlist")}} className='dark'>Get started</Button>
+            <Button onClick={() => {router.push("/auth")}} className='dark'>Get started</Button>
             </div>
           </div>
         </div>

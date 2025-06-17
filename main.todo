@@ -3,14 +3,13 @@ Links:
   ☐ https://www.learnprompt.org/act-as-chat-gpt-prompts/#Business
 
 Todos:
-  ✔ Implement into UVP @done(25-05-03 21:08)
-  ✔ Implement into Target Audience @done(25-05-03 21:08)
-  ✔ Implement into Problem Statement @done(25-05-03 21:08)
-  ✔ Make Formula for Validation Risk Report @done(25-05-05 14:41)
-  ☐ Guard and error-proof the data gathering processes for all.
+  ✔ Fix the competitive edge metric dashboard @done(25-06-07 11:29)
+  ✔ Add "view sources" button next to "Back to Validation Engine" @done(25-06-07 11:29)
+  ✔ Format text of Investor, Product, Tech @done(25-06-07 11:29)
+  ☐ Make the "edge metrics", "deep markers", etc, into TWO LINES ONLY (re-prompt basically)
+  ☐ Get refine idea to work
 
 Small notes:
-  ☐ Making Structure for Validation Report -> Tutorial. Miro.
   ☐ Name of idea. How do we incorporate?
   ✔ Dynamic business components based on whether user has paid or not @done(25-05-06 11:01)
   ☐ Making Target Audience much more detailed (and smaller)
@@ -38,3 +37,9 @@ Optimizations:
 
 Failsafes:
   ☐ If the user tries to go to any page, MAKE SURE PROPER MECHANISMS ARE IN PLACE
+
+
+
+GIT STUFF:
+  ☐ origin  https://github.com/ShashwatM3/stormee-ai.git (fetch)
+  ☐ origin  https://github.com/ShashwatM3/stormee-ai.git (push)

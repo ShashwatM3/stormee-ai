@@ -92,6 +92,7 @@
   font-size: 2.5vh;
   margin-bottom: 20px;
   font-weight: bold;
+  text-align: center;
 }
 
 #hpm-1-2 > div > div:nth-child(1) > p {
@@ -123,6 +124,18 @@
 .user-progress {
   position: fixed;
   bottom:20px;
-  right:20px;
-   
+  right:20px;   
+}
+
+.form-idea > input {
+  background: transparent;
+  border-radius: 0px 10px;
+}
+
+#form4, #form5 {
+  height: 10vh;
+  background: transparent;
+  border-radius: 0px 10px;
+  text-align: left;
+  resize: none;
 }
